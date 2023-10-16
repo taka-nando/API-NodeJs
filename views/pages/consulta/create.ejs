@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/fb6d262ee9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>Cadastrar Paciente</title>
+</head>
+
+<body style="background-color: #242833;">
+    <div class="container-fluid">
+        <!--row dividinto em 2 partes-->
+        <div class="row h-100">
+
+            <!--menu-->
+            <div class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px; background-color: #CED3D9;">
+                  <span class="fs-4 fw-bold">Projeto</span>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                  <li class="nav-item ">
+                    <a href="/home" class="nav-link  fw-semibold cormenu" aria-current="page">
+                        <i class="bi bi-house-door-fill fs-5 me-3"></i>
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/clinicaLista" class="nav-link fw-semibold cormenu">
+                        <i class="bi bi-hospital-fill  fs-5 me-3"></i>
+                      Clínica
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/medicoLista" class="nav-link fw-semibold cormenu">
+                        <i class="bi bi-capsule  fs-5 me-3"></i>
+                      Médico
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/pacienteLista" class="nav-link fw-semibold cormenu">
+                        <i class="bi bi-universal-access  fs-5 me-3" ></i>
+                      Paciente
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/consultaLista" class="nav-link active fw-semibold cormenu ">
+                        <i class="bi bi-clipboard-fill  fs-5 me-3"></i>
+                      Consultas
+                    </a>
+                  </li>
+                </ul>
+                <hr>
+              </div>
+
+
+
+            <div class=".form" id=".form">
+                <div class="mb-3">
+                    <label class="form-label" for="dataConsulta">Data da consulta:</label>
+                    <input class="form-control" name="dataConsulta" type="date" id="dataConsulta" placeholder="dataConsulta"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="horaConsulta">Hora da consulta:</label>
+                    <input class="form-control" name="horaConsulta" type="text" id="horaConsulta" placeholder="horaConsulta"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="tipoConsulta">Tipo da consulta:</label>
+                        <input class="form-control" name="tipoConsulta" type="text" id="tipoConsulta" placeholder="tipoConsulta"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="obsPaciente">Observações do paciente:</label>
+                        <input class="form-control" name="obsPaciente" type="text" id="obsPaciente" placeholder="obsPaciente"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="infosAdicionais">Informações adicionais:</label>
+                        <input class="form-control" name="infosAdicionais" type="text" id="infosAdicionais" placeholder="infosAdicionais"/>
+                </div>
+
+
+                <h3>Clínica:</h3>
+                <div id="id_clinica_div" class="radiobuttoncol">
+                </div><br>
+
+                <h3>Médico:</h3>
+                <div id="id_medico_div" class="radiobuttoncol">
+                </div><br>
+
+                <h3>Paciente:</h3>
+                <div id="id_paciente_div" class="radiobuttoncol">
+                </div>
+                <a href="/consultaLista">
+                <button type="submit" id="enviar" class="btn btn-primary my-4">Cadastrar</button>
+                </a>
+            </div>
+
+</body>
+
+<script>
+
+  //CRIAR RADIOBUTTON CLINICA
+  fetch('/radiobuttonsclinica')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('id_clinica_div').innerHTML = data;
+      })
+      .catch(error => console.error(error));
+  
+  //CRIAR RADIOBUTTON MEDICO
+  fetch('/radiobuttonsmedico')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('id_medico_div').innerHTML = data;
+      })
+      .catch(error => console.error(error));
+  
+  //CRIAR RADIOBUTTON PACIENTE
+  fetch('/radiobuttonspaciente')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('id_paciente_div').innerHTML = data;
+      })
+      .catch(error => console.error(error));
+
+
+function fazPost(url, body){
+    let req = new XMLHttpRequest();
+    req.open("POST", url, true);
+    req.setRequestHeader("Content-type", "application/json");
+    req.send(JSON.stringify(body));
+    return req.responseText;
+}
+
+//PEGA OS RADIOBUTTONS PELO NOME
+let radioCli = document.getElementsByName('opcao1');
+let radioMed = document.getElementsByName('opcao2'); 
+let radioPac = document.getElementsByName('opcao3');
+
+const formEl = document.getElementById('enviar')
+
+formEl.addEventListener('click', event => {
+  for (var i = 0; i < radioCli.length; i++){
+    if (radioCli[i].checked) {
+      radioCli = radioCli[i].value;
+    }
+  }
+  for (var i = 0; i < radioMed.length; i++){
+    if (radioMed[i].checked) {
+      radioMed = radioMed[i].value;
+    }
+  }
+  for (var i = 0; i < radioPac.length; i++){
+    if (radioPac[i].checked) {
+      radioPac = radioPac[i].value;
+    }
+  }
+  let raCli = parseInt(radioCli);
+  let raMed = parseInt(radioMed);
+  let raPac = parseInt(radioPac);
+    let url = "http://localhost:8000/consultacreate";
+    let dataConsulta = document.getElementById('dataConsulta').value
+    let horaConsulta = document.getElementById('horaConsulta').value
+    let tipoConsulta = document.getElementById('tipoConsulta').value
+    let obsPaciente = document.getElementById('obsPaciente').value
+    let infosAdicionais = document.getElementById('infosAdicionais').value
+    body = {
+        "dataConsulta": dataConsulta,
+        "horaConsulta": horaConsulta,
+        "tipoConsulta": tipoConsulta,
+        "obsPaciente": obsPaciente,
+        "infosAdicionais": infosAdicionais,
+        "id_clinica": raCli,
+        "id_paciente": raPac, 
+        "id_medico": raMed
+    }
+    fazPost(url, body);
+});
+
+
+</script>
+
+<style>
+  body {
+   font-family: cursive;
+   font-weight: bold;
+}
+    p{
+    color: #f5f7fa !important;
+
+}
+a.cormenu{
+    color: #242833 !important;
+
+}
+label{
+    color: #f5f7fa !important;
+
+}
+a:link {
+    color: #242833 !important;
+ }
+
+a:hover {
+     color: #f5f7fa !important;
+ }
+ 
+.active{
+    background-color: #474D59 !important;
+}
+
+.teste {
+    border-radius: 100%;
+    border-style:solid;
+    border: 10px black;
+    height: 100px;
+}
+.radiobuttoncol{
+  color:white;
+}
+h3{
+  color:white;
+}
+</style>
+
+
+</html>

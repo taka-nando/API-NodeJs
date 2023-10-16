@@ -1,0 +1,228 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/fb6d262ee9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>Clínica</title>
+</head>
+
+<body style="background-color: #242833;">
+    <div class="container-fluid">
+        <!--row dividinto em 2 partes-->
+        <div class="row h-100">
+
+            <!--menu-->
+            <div class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px; background-color: #CED3D9;">
+                <span class="fs-4 fw-bold">Projeto</span>
+              <hr>
+              <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item ">
+                  <a href="/home" class="nav-link  fw-semibold cormenu" aria-current="page">
+                      <i class="bi bi-house-door-fill fs-5 me-3"></i>
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/clinicaLista" class="nav-link fw-semibold cormenu">
+                      <i class="bi bi-hospital-fill  fs-5 me-3"></i>
+                    Clínica
+                  </a>
+                </li>
+                <li>
+                  <a href="/medicoLista" class="nav-link fw-semibold cormenu">
+                      <i class="bi bi-capsule  fs-5 me-3"></i>
+                    Médico
+                  </a>
+                </li>
+                <li>
+                  <a href="/pacienteLista" class="nav-link active fw-semibold cormenu">
+                      <i class="bi bi-universal-access  fs-5 me-3" ></i>
+                    Paciente
+                  </a>
+                </li>
+                <li>
+                  <a href="/consultaLista" class="nav-link fw-semibold cormenu ">
+                      <i class="bi bi-clipboard-fill  fs-5 me-3"></i>
+                    Consultas
+                  </a>
+                </li>
+              </ul>
+              <hr>
+            </div>
+
+
+            <!--conteudo-->
+            <div class="col-md-10 ">
+
+              <div class="col-md-12 mt-3">
+                <div class="alert alert-dark fw-bolder" role="alert">
+                  Pacientes cadastrados
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <a href="/pacienteForm"><button type="button" class="btn btn-success">Adicionar</button></a>
+              </div>
+              
+              <table class="table table-striped mt-3" id="tabela" style="background-color: white;">
+                <thead class="table-dark">
+                  <tr id="vaideletar">
+                    <th scope="col">Nome</th>
+                    <th scope="col">Cpf</th>
+                    <th scope="col">Data Nascimento</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Gênero</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+
+            <!-- Pop up -->
+    <!-- <div class="modalDialog" id="openModal">
+        <div class="mb-3">
+          <label class="form-label" for="nome">Nome</label>
+          <input class="form-control" name="nome" type="text" id="nome" placeholder="nome"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="cpf">Cpf</label>
+            <input class="form-control" name="cpf" type="text" id="cpf" placeholder="cpf"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="dataNascimento">Nascimento</label>
+                <input class="form-control" name="dataNascimento" type="date" id="dataNascimento" placeholder="dataNascimento"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="endereco">Endereço</label>
+                <input class="form-control" name="endereco" type="text" id="endereco" placeholder="endereco"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="telefone">Telefone</label>
+                <input class="form-control" name="telefone" type="text" id="telefone" placeholder="telefone"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="genero">Gênero</label>
+                <input class="form-control" name="genero" type="text" id="genero" placeholder="genero"/>
+        </div>
+          <div>
+            <a href="/pacienteLista">
+              <button type="submit" id="enviar" class="btn btn-primary">Registrar</button>
+            </a>
+              <button type="button" class="btn cancel" onclick="closeForm()">Cancelar</button>
+          </div>
+    </div> -->
+
+
+<script>
+
+    function fazGet(url){
+        let req = new XMLHttpRequest();
+        req.open("GET",url, false);
+        req.send();
+        return req.responseText;
+    }
+
+    function fazDel(url){
+        let req = new XMLHttpRequest();
+        req.open("DELETE",url, true);
+        req.send();
+        window.location.reload(true);
+    }
+
+    function criaLinha(paciente){
+        linha = document.createElement("tr");
+        let colnome = document.createElement('td')
+        let colcpf = document.createElement('td')
+        let colnasc = document.createElement('td')
+        let colendereco = document.createElement('td')
+        let coltelefone = document.createElement('td')
+        let colgenero = document.createElement('td')
+
+        let botaoDeletar = document.createElement('button')
+        botaoDeletar.setAttribute("onclick", "deletar("+ paciente.id +")");
+        botaoDeletar.className="btn btn-primary my-1";
+        botaoDeletar.textContent="deletar"
+        
+    
+        colnome.innerHTML = paciente.nome;
+        colcpf.innerHTML = paciente.cpf;
+        colnasc.innerHTML = paciente.dataNascimento;
+        colendereco.innerHTML = paciente.endereco;
+        coltelefone.innerHTML = paciente.telefone;
+        colgenero.innerHTML = paciente.genero;      
+    
+        linha.appendChild(colnome)
+        linha.appendChild(colcpf)
+        linha.appendChild(colnasc)
+        linha.appendChild(colendereco)
+        linha.appendChild(coltelefone)
+        linha.appendChild(colgenero)
+        linha.appendChild(botaoDeletar)
+
+        return linha;
+    }
+
+    function deletar(id){
+      let dados = fazDel("http://localhost:8000/pacientedel/" + id);
+      //alert('id: ' + id)
+    }
+
+    function main(){
+            let dados = fazGet("http://localhost:8000/listaAll");
+            let pacientes = JSON.parse(dados);
+            let tabela = document.getElementById("tabela");
+    
+            pacientes.forEach(element => {
+                let linha = criaLinha(element);
+                tabela.appendChild(linha);
+            });
+    }
+    
+    main()
+</script>
+</body>
+
+<style>
+
+body {
+   font-family: cursive;
+   font-weight: bold;
+}
+
+    p{
+    color: #f5f7fa !important;
+
+}
+a.cormenu{
+    color: #242833 !important;
+
+}
+label{
+    color: #f5f7fa !important;
+
+}
+a:link {
+    color: #242833 !important;
+ }
+
+a:hover {
+     color: #f5f7fa !important;
+ }
+ 
+.active{
+    background-color: #474D59 !important;
+}
+
+.teste {
+    border-radius: 100%;
+    border-style:solid;
+    border: 10px black;
+    height: 100px;
+}
+</style>
+</html>
