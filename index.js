@@ -3,7 +3,7 @@ let app = require('./config/server'); //Importando o servidor Express
 var cors = require('cors')
 app.use(cors()) 
 
-// VIEWS
+// VIEWS HOME
 app.get("/home", function(req, res){res.render('../views/pages/home/index');});
 // VIEWS PACIENTE
 app.get("/pacienteForm", function(req, res){res.render('../views/pages/paciente/create');});
