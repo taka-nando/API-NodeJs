@@ -25,7 +25,7 @@ const getAllClinicas = async () => {
     return tasks[0];
 }
 
-
+/* Criando commit */
 module.exports = {
     createClinica,
     updateClinica,
