@@ -7,7 +7,7 @@ const createClinica = async (task) => {
                                                     [nome, cnpj, telefone, endereco]);
     return createdClinica;
 }
-
+/* clinica */
 const updateClinica = async (id, task) => {
     const { nome, cnpj, telefone, endereco } = task;
     const query = "UPDATE clinicas SET nome = ?, cnpj = ?, telefone = ?, endereco = ? WHERE id = ?;"
